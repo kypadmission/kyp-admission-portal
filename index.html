@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<title>KYP Admission Portal | Bihar Government</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>KYP Admission Portal | Bihar Govt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS LINK (MOST IMPORTANT) -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="top-header">
-  <div class="logo-text">
-    शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग
-    <div class="sub-title">कुशल युवा कार्यक्रम (KYP)</div>
+<!-- ===== HEADER ===== -->
+<header class="top-header">
+  <div class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Emblem_of_Bihar.svg" alt="Bihar Govt">
   </div>
-  <div class="lang">हिंदी</div>
-</div>
+  <div class="title">
+    <h1>शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग</h1>
+    <h2>कुशल युवा कार्यक्रम (KYP)</h2>
+  </div>
+</header>
 
-<!-- MENU -->
-<div class="menu">
+<!-- ===== NAV BAR ===== -->
+<nav class="navbar">
   <a href="#">Home</a>
   <a href="#">Application Status</a>
   <a href="#">Guidelines</a>
   <a href="#">FAQ</a>
   <a href="#">How To Apply</a>
   <a href="#">Contact Us</a>
-</div>
+</nav>
 
-<!-- MAIN CONTENT -->
+<!-- ===== MAIN CONTENT ===== -->
 <div class="container">
 
-  <!-- LEFT -->
+  <!-- LEFT SECTION -->
   <div class="left-box">
-    <h2>विकसित बिहार के 7 निश्चय</h2>
+    <h3>विकसित बिहार के 7 निश्चय</h3>
     <p class="quote">“आर्थिक हल, युवाओं को बल”</p>
 
-    <div class="scheme">📘 बिहार स्टूडेंट क्रेडिट कार्ड योजना</div>
-    <div class="scheme">🤝 मुख्यमंत्री निश्चय स्वयं सहायता भत्ता योजना</div>
-    <div class="scheme">🎓 कुशल युवा कार्यक्रम (KYP)</div>
+    <ul>
+      <li>बिहार स्टूडेंट क्रेडिट कार्ड योजना</li>
+      <li>मुख्यमंत्री निश्चय स्वयं सहायता भत्ता योजना</li>
+      <li>कुशल युवा कार्यक्रम (KYP)</li>
+    </ul>
   </div>
 
-  <!-- RIGHT -->
-  <div class="right-box">
+  <!-- RIGHT LOGIN BOX -->
+  <div class="login-box">
     <h3>Login Here</h3>
 
-    <a class="btn yellow" href="student-registration.html">New Applicant Registration</a>
+    <a class="btn yellow" href="student-registration.html">
+      New Applicant Registration
+    </a>
 
     <input type="text" placeholder="User Name">
     <input type="password" placeholder="Password">
 
-    <a class="btn yellow" href="student-login.html">Login</a>
-    <a class="btn white" href="admin-login.html">Department Login</a>
-    <a class="btn white" href="#">DRCC Login</a>
+    <button class="btn yellow">Login</button>
+
+    <button class="btn white">Department Login</button>
+    <button class="btn white">DRCC Login</button>
+
+    <a class="forgot" href="forgot-password.html">Forgot Password?</a>
   </div>
 
 </div>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer>
   © 2026 Bihar Government | KYP Admission Portal
 </footer>
