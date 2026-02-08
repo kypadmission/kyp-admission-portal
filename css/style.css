@@ -1,16 +1,16 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #f4f4f4;
 }
 
 /* HEADER */
 .header {
+  background: #dff1fb;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #d9edf7;
-  padding: 10px 20px;
+  justify-content: space-between;
+  padding: 15px 40px;
 }
 
 .header img {
@@ -21,9 +21,21 @@ body {
   text-align: center;
 }
 
+.title h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.title h3 {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+/* MENU */
 .menu {
-  background: #2c3e91;
-  padding: 10px;
+  background: #2c3e94;
+  padding: 10px 40px;
 }
 
 .menu a {
@@ -36,41 +48,51 @@ body {
 /* MAIN */
 .main {
   display: flex;
-  justify-content: space-between;
+  padding: 30px 40px;
+  gap: 30px;
+}
+
+/* LEFT */
+.left {
+  flex: 3;
+  background: #fff27a;
   padding: 30px;
 }
 
-.left {
-  width: 60%;
-  background: #fff176;
-  padding: 20px;
+.left h2 {
+  margin-top: 0;
 }
 
+/* RIGHT LOGIN */
 .right {
-  width: 30%;
-  background: #2c3e91;
-  color: white;
+  flex: 1.2;
+  background: #2c3e94;
   padding: 20px;
+  color: white;
+}
+
+.right h3 {
+  text-align: center;
 }
 
 .btn {
   display: block;
   background: white;
-  color: #2c3e91;
+  color: #2c3e94;
+  text-align: center;
   padding: 10px;
   margin: 10px 0;
-  text-align: center;
   text-decoration: none;
   font-weight: bold;
 }
 
 .btn.yellow {
-  background: #ffeb3b;
-  color: black;
+  background: #ffe600;
 }
 
+/* FOOTER */
 .footer {
-  background: #003366;
+  background: #0b3c6f;
   color: white;
   text-align: center;
   padding: 10px;
