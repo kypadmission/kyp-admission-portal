@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>KYP Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+}
+header{
+  background:#1f3c88;
+  color:white;
+  padding:15px;
+  font-size:20px;
+}
+.container{
+  width:95%;
+  margin:20px auto;
+  background:white;
+  padding:15px;
+  border-radius:5px;
+}
+h2{
+  margin-top:0;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th, td{
+  border:1px solid #ccc;
+  padding:8px;
+  text-align:left;
+}
+th{
+  background:#1f3c88;
+  color:white;
+}
+.logout{
+  float:right;
+  background:#ff4d4d;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  cursor:pointer;
+}
+footer{
+  background:#1f3c88;
+  color:white;
+  text-align:center;
+  padding:10px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  KYP Admin Dashboard
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+  <h2>Registered Students</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Aadhaar</th>
+        <th>DOB</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable">
+      <tr><td colspan="6">Loading...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  © 2026 Bihar Government | KYP Admission Portal
+</footer>
+
+<!-- ============ FIREBASE ============ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCp...",
+  authDomain: "kyp-admission-portal.firebaseapp.com",
+  projectId: "kyp-admission-portal",
+  storageBucket: "kyp-admission-portal.appspot.com",
+  messagingSenderId: "696364940629",
+  appId: "1:696364940629:web:b6e7a5adeedcb439fcc3dc"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+async function loadStudents(){
+  const table = document.getElementById("studentTable");
+  table.innerHTML = "";
+
+  const querySnapshot = await getDocs(collection(db, "students"));
+  if(querySnapshot.empty){
+    table.innerHTML = "<tr><td colspan='6'>No data found</td></tr>";
+    return;
+  }
+
+  querySnapshot.forEach(doc=>{
+    const d = doc.data();
+    const row = `
+      <tr>
+        <td>${d.firstName} ${d.middleName || ""} ${d.lastName}</td>
+        <td>${d.mobile}</td>
+        <td>${d.email}</td>
+        <td>${d.aadhaar}</td>
+        <td>${d.dob}</td>
+        <td>${d.gender}</td>
+      </tr>
+    `;
+    table.innerHTML += row;
+  });
+}
+
+window.logout = async function(){
+  await signOut(auth);
+  window.location.href = "admin-login.html";
+}
+
+loadStudents();
+</script>
+
+</body>
+</html>
