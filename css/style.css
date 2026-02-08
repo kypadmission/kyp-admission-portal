@@ -41,30 +41,20 @@ body{
   margin:20px;
 }
 
-/* LEFT */
+/* LEFT BOX */
 .left-box{
   width:60%;
   background:#fff176;
   padding:20px;
 }
-.left-box h2{
-  margin-top:0;
-}
-.left-box ul{
-  padding-left:20px;
-}
 
-/* RIGHT */
+/* RIGHT BOX */
 .right-box{
   width:30%;
   background:#2c3e90;
   padding:20px;
   color:white;
 }
-.right-box h3{
-  text-align:center;
-}
-
 .right-box input{
   width:100%;
   padding:10px;
