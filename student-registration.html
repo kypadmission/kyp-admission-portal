@@ -1,99 +1,177 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<title>KYP Student Registration | Bihar Government</title>
+  <meta charset="UTF-8">
+  <title>KYP Student Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f4f4;
-}
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f2f2f2;
+      margin:0;
+    }
+    header{
+      background:#dff1fb;
+      padding:15px;
+      text-align:center;
+      font-size:20px;
+      font-weight:bold;
+    }
+    nav{
+      background:#1f3c88;
+      padding:10px;
+    }
+    nav a{
+      color:white;
+      margin-right:15px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    .container{
+      background:white;
+      width:90%;
+      max-width:900px;
+      margin:20px auto;
+      padding:20px;
+      border-radius:5px;
+    }
+    h2{
+      background:#1f3c88;
+      color:white;
+      padding:10px;
+      font-size:18px;
+    }
+    label{
+      font-weight:bold;
+      display:block;
+      margin-top:12px;
+    }
+    input, select{
+      width:100%;
+      padding:8px;
+      margin-top:5px;
+    }
+    button{
+      margin-top:20px;
+      padding:10px 20px;
+      background:#1f3c88;
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-size:16px;
+    }
+    button:hover{
+      background:#162a60;
+    }
+    footer{
+      background:#1f3c88;
+      color:white;
+      text-align:center;
+      padding:10px;
+      margin-top:20px;
+    }
+  </style>
+</head>
 
-/* HEADER */
-.header {
-  background: #e6f4fb;
-  padding: 20px;
-  text-align: center;
-}
+<body>
 
-.header h1 {
-  margin: 5px 0;
-  font-size: 24px;
-}
+<header>
+  शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग  
+  <br>कुशल युवा कार्यक्रम (KYP)
+</header>
 
-.header h2 {
-  margin: 0;
-  font-size: 18px;
-}
+<nav>
+  <a href="index.html">Home</a>
+  <a href="#">Application Status</a>
+  <a href="#">Guidelines</a>
+  <a href="#">Contact Us</a>
+</nav>
 
-/* NAV */
-.nav {
-  background: #2c3e94;
-  padding: 10px;
-}
+<div class="container">
+  <h2>Student Registration Form</h2>
 
-.nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
+  <label>Applicant First Name *</label>
+  <input type="text" id="fname">
 
-/* FORM CONTAINER */
-.container {
-  background: white;
-  width: 80%;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-}
+  <label>Middle Name</label>
+  <input type="text" id="mname">
 
-.section-title {
-  background: #2c3e94;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
+  <label>Last Name *</label>
+  <input type="text" id="lname">
 
-/* FORM ROW */
-.row {
-  display: flex;
-  margin-bottom: 12px;
-}
+  <label>Email ID *</label>
+  <input type="email" id="email">
 
-.row label {
-  width: 30%;
-  font-weight: bold;
-}
+  <label>Mobile Number *</label>
+  <input type="text" id="mobile">
 
-.row input, .row select {
-  width: 70%;
-  padding: 8px;
-}
+  <label>Aadhaar Number *</label>
+  <input type="text" id="aadhaar">
 
-/* OTP BUTTON */
-.otp-btn {
-  background: green;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  cursor: pointer;
-  margin-top: 5px;
-}
+  <label>Date of Birth *</label>
+  <input type="date" id="dob">
 
-/* SUBMIT */
-.submit-btn {
-  background: #2c3e94;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
+  <label>Gender *</label>
+  <select id="gender">
+    <option value="">Select</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+  </select>
 
-/* FOOTER */
-.footer {
-  background: #12
+  <button onclick="registerStudent()">Submit Registration</button>
+</div>
+
+<footer>
+  © 2026 Bihar Government | KYP Admission Portal
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCp...",
+    authDomain: "kyp-admission-portal.firebaseapp.com",
+    projectId: "kyp-admission-portal",
+    storageBucket: "kyp-admission-portal.appspot.com",
+    messagingSenderId: "696364940629",
+    appId: "1:696364940629:web:b6e7a5adeedcb439fcc3dc"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.registerStudent = async function () {
+
+    const data = {
+      firstName: document.getElementById("fname").value,
+      middleName: document.getElementById("mname").value,
+      lastName: document.getElementById("lname").value,
+      email: document.getElementById("email").value,
+      mobile: document.getElementById("mobile").value,
+      aadhaar: document.getElementById("aadhaar").value,
+      dob: document.getElementById("dob").value,
+      gender: document.getElementById("gender").value,
+      createdAt: new Date()
+    };
+
+    if(!data.firstName || !data.lastName || !data.email || !data.mobile){
+      alert("Please fill all required fields");
+      return;
+    }
+
+    try{
+      await addDoc(collection(db, "students"), data);
+      alert("Registration Successful ✅");
+    }catch(e){
+      alert("Error: " + e.message);
+    }
+  }
+</script>
+
+</body>
+</html>
