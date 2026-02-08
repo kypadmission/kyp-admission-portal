@@ -129,6 +129,9 @@ window.login = async function(){
     msg.innerText = "Email aur Password required hai";
     return;
   }
+<div class="link">
+  <a href="forgot-password.html">Forgot Password?</a>
+</div>
 
   try{
     await signInWithEmailAndPassword(auth, email, password);
