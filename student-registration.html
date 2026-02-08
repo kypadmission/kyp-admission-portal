@@ -1,176 +1,162 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>KYP Student Registration</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>KYP Student Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body{
-      font-family: Arial, sans-serif;
-      background:#f2f2f2;
-      margin:0;
-    }
-    header{
-      background:#dff1fb;
-      padding:15px;
-      text-align:center;
-      font-size:20px;
-      font-weight:bold;
-    }
-    nav{
-      background:#1f3c88;
-      padding:10px;
-    }
-    nav a{
-      color:white;
-      margin-right:15px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-    .container{
-      background:white;
-      width:90%;
-      max-width:900px;
-      margin:20px auto;
-      padding:20px;
-      border-radius:5px;
-    }
-    h2{
-      background:#1f3c88;
-      color:white;
-      padding:10px;
-      font-size:18px;
-    }
-    label{
-      font-weight:bold;
-      display:block;
-      margin-top:12px;
-    }
-    input, select{
-      width:100%;
-      padding:8px;
-      margin-top:5px;
-    }
-    button{
-      margin-top:20px;
-      padding:10px 20px;
-      background:#1f3c88;
-      color:white;
-      border:none;
-      cursor:pointer;
-      font-size:16px;
-    }
-    button:hover{
-      background:#162a60;
-    }
-    footer{
-      background:#1f3c88;
-      color:white;
-      text-align:center;
-      padding:10px;
-      margin-top:20px;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+}
+header{
+  background:#1f3c88;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+}
+.form-box{
+  width:420px;
+  margin:30px auto;
+  background:white;
+  padding:25px;
+  border-radius:5px;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+.form-box h2{
+  text-align:center;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#1f3c88;
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+}
+button:hover{
+  background:#163172;
+}
+.msg{
+  text-align:center;
+  margin-top:10px;
+  font-weight:bold;
+}
+.success{ color:green; }
+.error{ color:red; }
+footer{
+  background:#1f3c88;
+  color:white;
+  text-align:center;
+  padding:10px;
+  margin-top:40px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग  
-  <br>कुशल युवा कार्यक्रम (KYP)
+  KYP Admission Portal – Student Registration
 </header>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="#">Application Status</a>
-  <a href="#">Guidelines</a>
-  <a href="#">Contact Us</a>
-</nav>
+<div class="form-box">
+  <h2>Student Registration</h2>
 
-<div class="container">
-  <h2>Student Registration Form</h2>
-
-  <label>Applicant First Name *</label>
-  <input type="text" id="fname">
-
-  <label>Middle Name</label>
-  <input type="text" id="mname">
-
-  <label>Last Name *</label>
-  <input type="text" id="lname">
-
-  <label>Email ID *</label>
-  <input type="email" id="email">
-
-  <label>Mobile Number *</label>
-  <input type="text" id="mobile">
-
-  <label>Aadhaar Number *</label>
-  <input type="text" id="aadhaar">
-
-  <label>Date of Birth *</label>
+  <input type="text" id="name" placeholder="Student Name">
+  <input type="text" id="father" placeholder="Father Name">
   <input type="date" id="dob">
+  <input type="text" id="mobile" placeholder="Mobile Number">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
 
-  <label>Gender *</label>
-  <select id="gender">
-    <option value="">Select</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Other</option>
+  <select id="course">
+    <option value="">Select Course</option>
+    <option value="KYP">KYP</option>
+    <option value="CCC">CCC</option>
+    <option value="DCA">DCA</option>
   </select>
 
-  <button onclick="registerStudent()">Submit Registration</button>
+  <button onclick="register()">Register</button>
+
+  <div class="msg" id="msg"></div>
 </div>
 
 <footer>
   © 2026 Bihar Government | KYP Admission Portal
 </footer>
 
-<!-- ================= FIREBASE ================= -->
-
+<!-- ========== FIREBASE ========== -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCp...",
-    authDomain: "kyp-admission-portal.firebaseapp.com",
-    projectId: "kyp-admission-portal",
-    storageBucket: "kyp-admission-portal.appspot.com",
-    messagingSenderId: "696364940629",
-    appId: "1:696364940629:web:b6e7a5adeedcb439fcc3dc"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCp...",
+  authDomain: "kyp-admission-portal.firebaseapp.com",
+  projectId: "kyp-admission-portal",
+  storageBucket: "kyp-admission-portal.appspot.com",
+  messagingSenderId: "696364940629",
+  appId: "1:696364940629:web:b6e7a5adeedcb439fcc3dc"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  window.registerStudent = async function () {
+window.register = async function(){
+  const name = document.getElementById("name").value;
+  const father = document.getElementById("father").value;
+  const dob = document.getElementById("dob").value;
+  const mobile = document.getElementById("mobile").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const course = document.getElementById("course").value;
+  const msg = document.getElementById("msg");
 
-    const data = {
-      firstName: document.getElementById("fname").value,
-      middleName: document.getElementById("mname").value,
-      lastName: document.getElementById("lname").value,
-      email: document.getElementById("email").value,
-      mobile: document.getElementById("mobile").value,
-      aadhaar: document.getElementById("aadhaar").value,
-      dob: document.getElementById("dob").value,
-      gender: document.getElementById("gender").value,
-      createdAt: new Date()
-    };
+  msg.innerText = "";
+  msg.className = "msg";
 
-    if(!data.firstName || !data.lastName || !data.email || !data.mobile){
-      alert("Please fill all required fields");
-      return;
-    }
-
-    try{
-      await addDoc(collection(db, "students"), data);
-      alert("Registration Successful ✅");
-    }catch(e){
-      alert("Error: " + e.message);
-    }
+  if(!name || !father || !dob || !mobile || !email || !password || !course){
+    msg.innerText = "सभी field भरना जरूरी है";
+    msg.classList.add("error");
+    return;
   }
+
+  try{
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+
+    await setDoc(doc(db, "students", userCred.user.uid), {
+      name,
+      father,
+      dob,
+      mobile,
+      email,
+      course,
+      role: "student",
+      createdAt: serverTimestamp()
+    });
+
+    msg.innerText = "Registration Successful";
+    msg.classList.add("success");
+
+    document.querySelectorAll("input,select").forEach(e=>e.value="");
+
+  }catch(err){
+    msg.innerText = err.message;
+    msg.classList.add("error");
+  }
+};
 </script>
 
 </body>
