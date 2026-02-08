@@ -1,182 +1,64 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<title>KYP Admission Portal | Bihar Government</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f4f4;
-}
-
-/* HEADER */
-.header {
-  background: #e6f4fb;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-}
-
-.header h1 {
-  margin: 5px 0;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.header h2 {
-  margin: 5px 0;
-  font-size: 18px;
-}
-
-.lang {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  background: yellow;
-  padding: 6px 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* NAVBAR */
-.nav {
-  background: #2c3e94;
-  padding: 10px;
-}
-
-.nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* MAIN CONTENT */
-.container {
-  display: flex;
-  padding: 20px;
-  gap: 20px;
-}
-
-/* LEFT SECTION */
-.left {
-  flex: 2;
-  background: #fff27a;
-  padding: 20px;
-}
-
-.left h2 {
-  margin-top: 0;
-}
-
-.scheme {
-  background: white;
-  padding: 12px;
-  margin: 10px 0;
-  font-weight: bold;
-  border-left: 5px solid #2c3e94;
-}
-
-/* RIGHT LOGIN BOX */
-.right {
-  flex: 1;
-  background: #2c3e94;
-  padding: 20px;
-  color: white;
-}
-
-.right h3 {
-  text-align: center;
-}
-
-.input {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-}
-
-.btn {
-  display: block;
-  text-align: center;
-  padding: 10px;
-  margin: 8px 0;
-  background: white;
-  color: #2c3e94;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.btn.yellow {
-  background: yellow;
-  color: black;
-}
-
-/* FOOTER */
-.footer {
-  background: #123c7a;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>KYP Admission Portal | Bihar Govt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="lang">हिंदी</div>
-  <h1>शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग</h1>
-  <h2>कुशल युवा कार्यक्रम (KYP)</h2>
-</div>
+<header class="top-header">
+  शिक्षा विभाग, योजना एवं विकास विभाग एवं श्रम संसाधन विभाग  
+  <div class="sub-title">कुशल युवा कार्यक्रम (KYP)</div>
+</header>
 
-<!-- NAVBAR -->
-<div class="nav">
-  <a href="#">Home</a>
+<nav class="menu">
+  <a href="index.html">Home</a>
   <a href="#">Application Status</a>
   <a href="#">Guidelines</a>
   <a href="#">FAQ</a>
   <a href="#">How To Apply</a>
   <a href="#">Contact Us</a>
-</div>
+</nav>
 
-<!-- MAIN CONTENT -->
 <div class="container">
 
-  <!-- LEFT -->
-  <div class="left">
+  <!-- LEFT CONTENT -->
+  <div class="left-box">
     <h2>विकसित बिहार के 7 निश्चय</h2>
-    <p><b>“आर्थिक हल, युवाओं को बल”</b></p>
+    <p>“आर्थिक हल, युवाओं को बल”</p>
 
-    <div class="scheme">🎓 बिहार स्टूडेंट क्रेडिट कार्ड योजना</div>
-    <div class="scheme">🤝 मुख्यमंत्री निश्चय स्वयं सहायता भत्ता योजना</div>
-    <div class="scheme">💼 कुशल युवा कार्यक्रम (KYP)</div>
+    <ul>
+      <li>बिहार स्टूडेंट क्रेडिट कार्ड योजना</li>
+      <li>मुख्यमंत्री निश्चय स्वयं सहायता भत्ता योजना</li>
+      <li>कुशल युवा कार्यक्रम (KYP)</li>
+    </ul>
   </div>
 
-  <!-- RIGHT -->
-  <div class="right">
+  <!-- RIGHT LOGIN PANEL -->
+  <div class="right-box">
     <h3>Login Here</h3>
 
-    <a href="#" class="btn yellow">New Applicant Registration</a>
+    <a href="student-registration.html" class="btn yellow">
+      New Applicant Registration
+    </a>
 
-    <input type="text" class="input" placeholder="User Name">
-    <input type="password" class="input" placeholder="Password">
+    <input type="text" placeholder="User Name">
+    <input type="password" placeholder="Password">
 
-    <a href="#" class="btn yellow">Login</a>
+    <a href="student-login.html" class="btn yellow">Login</a>
 
-    <a href="#" class="btn">Department Login</a>
-    <a href="#" class="btn">DRCC Login</a>
+    <a href="admin-login.html" class="btn white">Department Login</a>
+    <a href="#" class="btn white">DRCC Login</a>
   </div>
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
+<footer>
   © 2026 Bihar Government | KYP Admission Portal
-</div>
+</footer>
 
 </body>
 </html>
